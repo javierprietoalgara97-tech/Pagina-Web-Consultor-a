@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>¡Solicitud recibida! — Maestría Consultoría</title>
+  <meta name="description" content="Hemos recibido tu solicitud. En menos de 24h nos ponemos en contacto contigo." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --teal: #1D9E75; --teal-dark: #0F6E56; --teal-mid: #5DCAA5;
+      --teal-light: #E1F5EE; --teal-bg: #1a2e2a; --amber: #EF9F27;
+      --red-light: #FCEBEB; --green-light: #EAF3DE; --green-dark: #3B6D11;
+      --text-primary: #1a1a1a; --text-secondary: #555; --text-tertiary: #888;
+      --bg-primary: #ffffff; --bg-secondary: #f7f7f5;
+      --border: rgba(0,0,0,0.1); --border-strong: rgba(0,0,0,0.18);
+      --radius-sm: 6px; --radius-md: 8px; --radius-lg: 12px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --teal: #5DCAA5; --teal-dark: #9FE1CB; --teal-mid: #5DCAA5; --teal-light: #04342C;
+        --text-primary: #f0f0ee; --text-secondary: #aaa; --text-tertiary: #666;
+        --bg-primary: #1c1c1a; --bg-secondary: #242422;
+        --border: rgba(255,255,255,0.1); --border-strong: rgba(255,255,255,0.18);
+      }
+    }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg-secondary); color: var(--text-primary); line-height: 1.7; }
+    .lp-wrap { max-width: 760px; margin: 0 auto; background: var(--bg-primary); min-height: 100vh; display: flex; flex-direction: column; }
+
+    /* NAV */
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; height: 64px; background: var(--teal-bg); }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-icon { width: 36px; height: 36px; background: #085041; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .logo-icon svg { width: 20px; height: 20px; }
+    .logo-text { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; line-height: 1; }
+    .logo-text .part1 { color: #ffffff; }
+    .logo-text .part2 { color: var(--teal-mid); }
+    .logo-sub { font-size: 9px; letter-spacing: 1.5px; color: var(--teal-mid); display: block; margin-top: 2px; text-transform: uppercase; }
+
+    /* HERO CONFIRMACIÓN */
+    .confirm-hero { background: var(--teal-bg); padding: 3.5rem 2rem 4rem; text-align: center; }
+    .check-circle { width: 72px; height: 72px; border-radius: 50%; background: rgba(93,202,165,0.15); border: 2px solid var(--teal-mid); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; }
+    .check-circle svg { width: 36px; height: 36px; }
+    .confirm-hero .badge { display: inline-block; background: rgba(93,202,165,0.15); color: var(--teal-mid); font-size: 12px; font-weight: 500; padding: 5px 14px; border-radius: 20px; margin-bottom: 1.2rem; border: 0.5px solid rgba(93,202,165,0.3); }
+    .confirm-hero h1 { font-size: 28px; font-weight: 700; color: #ffffff; margin-bottom: 0.8rem; line-height: 1.3; }
+    .confirm-hero h1 em { color: var(--teal-mid); font-style: normal; }
+    .confirm-hero p { font-size: 16px; color: rgba(255,255,255,0.65); max-width: 420px; margin: 0 auto; }
+
+    /* PRÓXIMOS PASOS */
+    .steps-section { padding: 3rem 2rem; }
+    .section-label { font-size: 11px; font-weight: 600; color: var(--teal); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+    .steps-section h2 { font-size: 22px; font-weight: 700; margin-bottom: 0.5rem; }
+    .section-sub { font-size: 15px; color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.6; }
+    .steps { display: flex; flex-direction: column; gap: 20px; }
+    .step { display: flex; gap: 18px; align-items: flex-start; }
+    .step-num { width: 36px; height: 36px; min-width: 36px; border-radius: 50%; background: var(--teal-light); color: var(--teal); font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+    .step-body h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    .step-body p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+
+    /* INFO CARD */
+    .info-section { padding: 0 2rem 3rem; }
+    .info-card { background: var(--bg-secondary); border: 0.5px solid var(--border-strong); border-radius: var(--radius-lg); padding: 1.8rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 520px) { .info-card { grid-template-columns: 1fr; } }
+    .info-item { display: flex; gap: 14px; align-items: flex-start; }
+    .info-icon { width: 40px; height: 40px; min-width: 40px; border-radius: var(--radius-md); background: var(--teal-light); display: flex; align-items: center; justify-content: center; font-size: 18px; }
+    .info-item h4 { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+    .info-item p { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+
+    /* TESTIMONIAL */
+    .testimonial-wrap { padding: 0 2rem 3rem; border-top: 0.5px solid var(--border); padding-top: 3rem; }
+    .testimonial { background: var(--bg-secondary); border-left: 3px solid var(--teal); border-radius: 0 var(--radius-md) var(--radius-md) 0; padding: 1.4rem 1.6rem; }
+    .testimonial p { font-size: 15px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 14px; font-style: italic; }
+    .t-author { display: flex; align-items: center; gap: 12px; }
+    .avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--teal); color: #fff; font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+    .t-author div { font-size: 13px; }
+    .t-author strong { display: block; font-weight: 600; }
+    .t-author span { color: var(--text-secondary); }
+
+    /* PROOF */
+    .proof { padding: 1.5rem 2rem; display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; border-top: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); background: var(--bg-secondary); }
+    .proof-item { text-align: center; }
+    .proof-item strong { display: block; font-size: 26px; font-weight: 700; color: var(--teal); }
+    .proof-item span { font-size: 12px; color: var(--text-secondary); }
+
+    /* CTA VOLVER */
+    .cta-back { padding: 3rem 2rem; text-align: center; }
+    .cta-back p { font-size: 15px; color: var(--text-secondary); margin-bottom: 1.2rem; }
+    .btn-back { display: inline-block; background: var(--teal); color: #fff; border: none; padding: 13px 28px; border-radius: var(--radius-md); font-size: 15px; font-weight: 700; cursor: pointer; text-decoration: none; transition: background 0.15s; font-family: inherit; }
+    .btn-back:hover { background: var(--teal-dark); }
+
+    /* FOOTER */
+    .footer { margin-top: auto; padding: 1.4rem 2rem; border-top: 0.5px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+    .footer p { font-size: 12px; color: var(--text-tertiary); }
+    .footer a { color: var(--text-tertiary); text-decoration: none; }
+    .footer a:hover { color: var(--teal); }
+
+    @media (max-width: 600px) {
+      .nav, .steps-section, .info-section, .testimonial-wrap, .cta-back { padding-left: 1.2rem; padding-right: 1.2rem; }
+      .confirm-hero h1 { font-size: 22px; }
+      .proof { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="lp-wrap">
+
+  <nav class="nav">
+    <a href="maestria-landing.html" class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="10" cy="10" r="8" fill="#085041"/>
+          <path d="M10 3L11.8 8.5H17.5L12.9 11.8L14.6 17.3L10 14L5.4 17.3L7.1 11.8L2.5 8.5H8.2L10 3Z" fill="#5DCAA5"/>
+        </svg>
+      </div>
+      <div>
+        <span class="logo-text"><span class="part1">Maesr</span><span class="part2">ía</span></span>
+        <span class="logo-sub">Consultoría</span>
+      </div>
+    </a>
+  </nav>
+
+  <section class="confirm-hero">
+    <div class="check-circle">
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9 18.5L15 24.5L27 12" stroke="#5DCAA5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="badge">Solicitud recibida</div>
+    <h1>¡Genial, <em>ya estamos en contacto!</em></h1>
+    <p>He recibido tu solicitud. Me pondré en contacto contigo en menos de 24 horas para coordinar tu consulta gratuita.</p>
+  </section>
+
+  <section class="steps-section">
+    <div class="section-label">¿Qué pasa ahora?</div>
+    <h2>Estos son los próximos pasos</h2>
+    <p class="section-sub">El proceso es sencillo y sin compromiso. Así es como avanzaremos juntos.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Recibirás un email de confirmación</h4>
+          <p>En los próximos minutos te llegará un email confirmando que hemos recibido tu solicitud. Revisa también la carpeta de spam si no lo ves.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Te contacto en menos de 24h</h4>
+          <p>Me pondré en contacto contigo por teléfono o email para acordar el horario que mejor te venga para la consulta.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Consulta gratuita de 30 minutos</h4>
+          <p>Analizamos tu situación, identifico qué puedes automatizar y te digo exactamente cuánto tiempo recuperarías. Sin compromiso.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="info-section">
+    <div class="info-card">
+      <div class="info-item">
+        <div class="info-icon">📅</div>
+        <div>
+          <h4>Respuesta en &lt; 24h</h4>
+          <p>Días laborables. Si envías el formulario el fin de semana, te escribo el lunes.</p>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">🔒</div>
+        <div>
+          <h4>Tus datos, protegidos</h4>
+          <p>Solo uso tu información para contactarte. Sin spam ni cesión a terceros.</p>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">💬</div>
+        <div>
+          <h4>¿Tienes alguna pregunta?</h4>
+          <p>Escríbeme directamente a <a href="mailto:hola@maestria.es" style="color:var(--teal);">hola@maestria.es</a></p>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">🎯</div>
+        <div>
+          <h4>Sin compromiso</h4>
+          <p>La consulta es totalmente gratuita. No hay ninguna obligación de contratar nada.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="proof">
+    <div class="proof-item"><strong>+40</strong><span>centros y docentes</span></div>
+    <div class="proof-item"><strong>8h</strong><span>ahorradas de media/semana</span></div>
+    <div class="proof-item"><strong>100%</strong><span>adaptado a tu caso</span></div>
+  </div>
+
+  <div class="testimonial-wrap">
+    <div class="testimonial">
+      <p>"En dos semanas dejé de pasar dos horas al día enviando emails y confirmaciones. Ahora todo funciona solo y yo me dedico a preparar mis clases."</p>
+      <div class="t-author">
+        <div class="avatar">MG</div>
+        <div><strong>Marta García</strong><span>Profesora de inglés · 60 alumnos</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-back">
+    <p>¿Quieres repasar la información mientras esperas?</p>
+    <a href="maestria-landing.html" class="btn-back">← Volver a la página principal</a>
+  </div>
+
+  <footer class="footer">
+    <p>© 2026 Maestría Consultoría</p>
+    <p><a href="mailto:hola@maestria.es">hola@maestria.es</a> · <a href="#">Política de privacidad</a></p>
+  </footer>
+
+</div>
+</body>
+</html>
