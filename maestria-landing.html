@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Maestría — Recupera 5 a 10 horas a la semana</title>
+  <title>Maestría — Consultoría de automatización educativa</title>
   <meta name="description" content="Consultoría para profesores, academias y empresas de formación. Automatiza tareas repetitivas y recupera hasta 10 horas semanales." />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -13,263 +13,726 @@
       --red-light: #FCEBEB; --green-light: #EAF3DE; --green-dark: #3B6D11;
       --text-primary: #1a1a1a; --text-secondary: #555; --text-tertiary: #888;
       --bg-primary: #ffffff; --bg-secondary: #f7f7f5;
-      --border: rgba(0,0,0,0.1); --border-strong: rgba(0,0,0,0.18);
-      --radius-sm: 6px; --radius-md: 8px; --radius-lg: 12px;
+      --border: rgba(0,0,0,0.09); --border-strong: rgba(0,0,0,0.16);
+      --radius-sm: 6px; --radius-md: 8px; --radius-lg: 14px; --radius-xl: 20px;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.06); --shadow-md: 0 6px 24px rgba(0,0,0,0.09);
+      --shadow-teal: 0 4px 24px rgba(29,158,117,0.12);
+      --max-w: 1120px;
     }
     @media (prefers-color-scheme: dark) {
       :root {
         --teal: #5DCAA5; --teal-dark: #9FE1CB; --teal-mid: #5DCAA5; --teal-light: #04342C;
         --text-primary: #f0f0ee; --text-secondary: #aaa; --text-tertiary: #666;
         --bg-primary: #1c1c1a; --bg-secondary: #242422;
-        --border: rgba(255,255,255,0.1); --border-strong: rgba(255,255,255,0.18);
+        --border: rgba(255,255,255,0.08); --border-strong: rgba(255,255,255,0.16);
+        --shadow-sm: 0 2px 8px rgba(0,0,0,0.3); --shadow-md: 0 6px 24px rgba(0,0,0,0.4);
       }
     }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg-secondary); color: var(--text-primary); line-height: 1.7; }
-    .lp-wrap { max-width: 760px; margin: 0 auto; background: var(--bg-primary); min-height: 100vh; }
 
-    /* NAV */
-    .nav { display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; height: 64px; background: var(--teal-bg); position: sticky; top: 0; z-index: 100; }
+    html { scroll-behavior: smooth; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg-secondary); color: var(--text-primary); line-height: 1.7; }
+
+    /* ─── NAVIGATION ─────────────────────────────── */
+    .nav {
+      position: sticky; top: 0; z-index: 200;
+      background: var(--teal-bg);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-inner {
+      max-width: var(--max-w); margin: 0 auto;
+      padding: 0 2rem; height: 66px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
     .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .logo-icon { width: 36px; height: 36px; background: #085041; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .logo-icon svg { width: 20px; height: 20px; }
-    .logo-text { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; line-height: 1; }
-    .logo-text .part1 { color: #ffffff; }
+    .logo-icon { width: 38px; height: 38px; background: #085041; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .logo-icon svg { width: 22px; height: 22px; }
+    .logo-text { font-size: 19px; font-weight: 700; letter-spacing: -0.3px; line-height: 1; }
+    .logo-text .part1 { color: #fff; }
     .logo-text .part2 { color: var(--teal-mid); }
     .logo-sub { font-size: 9px; letter-spacing: 1.5px; color: var(--teal-mid); display: block; margin-top: 2px; text-transform: uppercase; }
-    .nav-cta { background: var(--teal-mid); color: var(--teal-bg); border: none; padding: 9px 18px; border-radius: var(--radius-md); font-size: 14px; font-weight: 700; cursor: pointer; transition: background 0.15s; text-decoration: none; }
+    .nav-links { display: flex; align-items: center; gap: 0.2rem; }
+    .nav-link { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; font-weight: 500; padding: 7px 14px; border-radius: var(--radius-md); transition: color 0.15s, background 0.15s; }
+    .nav-link:hover { color: #fff; background: rgba(255,255,255,0.07); }
+    .nav-cta { background: var(--teal-mid); color: var(--teal-bg) !important; border: none; padding: 9px 20px; border-radius: var(--radius-md); font-size: 14px; font-weight: 700; cursor: pointer; transition: background 0.15s; text-decoration: none; margin-left: 6px; }
     .nav-cta:hover { background: #9FE1CB; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: rgba(255,255,255,0.8); border-radius: 2px; transition: transform 0.2s, opacity 0.2s; }
+    .mobile-menu { display: none; background: var(--teal-bg); border-top: 1px solid rgba(255,255,255,0.08); padding: 1rem 2rem 1.4rem; flex-direction: column; gap: 4px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu .nav-link { display: block; padding: 10px 12px; font-size: 15px; }
+    .mobile-menu .nav-cta { display: block; text-align: center; padding: 12px; margin-top: 8px; font-size: 15px; }
 
-    /* HERO */
-    .hero { display: grid; grid-template-columns: 1fr 260px; gap: 0; align-items: end; background: var(--teal-bg); padding: 3rem 2rem 0; overflow: hidden; }
-    .hero-text { padding-bottom: 3rem; }
-    .badge { display: inline-block; background: rgba(93,202,165,0.15); color: var(--teal-mid); font-size: 12px; font-weight: 500; padding: 5px 14px; border-radius: 20px; margin-bottom: 1.2rem; border: 0.5px solid rgba(93,202,165,0.3); }
-    .hero h1 { font-size: 30px; font-weight: 700; line-height: 1.25; margin-bottom: 1rem; color: #ffffff; }
+    /* ─── SHARED LAYOUT ──────────────────────────── */
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; }
+    .section-tag { display: inline-block; font-size: 11px; font-weight: 600; color: var(--teal); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; }
+    .section-title { font-size: 28px; font-weight: 700; line-height: 1.25; margin-bottom: 0.6rem; }
+    .section-desc { font-size: 16px; color: var(--text-secondary); line-height: 1.7; max-width: 600px; margin-bottom: 2.5rem; }
+
+    /* ─── HERO ───────────────────────────────────── */
+    .hero { background: var(--teal-bg); overflow: hidden; }
+    .hero-inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 4.5rem 2rem 0;
+      display: grid; grid-template-columns: 1fr 340px; gap: 2rem; align-items: end;
+    }
+    .hero-text { padding-bottom: 4rem; }
+    .badge { display: inline-block; background: rgba(93,202,165,0.15); color: var(--teal-mid); font-size: 12px; font-weight: 500; padding: 5px 14px; border-radius: 20px; margin-bottom: 1.4rem; border: 0.5px solid rgba(93,202,165,0.3); }
+    .hero h1 { font-size: 38px; font-weight: 800; line-height: 1.18; margin-bottom: 1.2rem; color: #fff; letter-spacing: -0.5px; }
     .hero h1 em { color: var(--teal-mid); font-style: normal; }
-    .hero p { font-size: 16px; color: rgba(255,255,255,0.65); line-height: 1.7; max-width: 380px; margin-bottom: 1.8rem; }
+    .hero-desc { font-size: 17px; color: rgba(255,255,255,0.65); line-height: 1.75; max-width: 480px; margin-bottom: 2rem; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary { background: var(--teal-mid); color: var(--teal-bg); border: none; padding: 14px 28px; border-radius: var(--radius-md); font-size: 16px; font-weight: 700; cursor: pointer; transition: background 0.15s, transform 0.1s; text-decoration: none; display: inline-block; font-family: inherit; }
+    .btn-primary:hover { background: #9FE1CB; }
+    .btn-primary:active { transform: scale(0.98); }
+    .btn-ghost { background: transparent; color: rgba(255,255,255,0.75); border: 1px solid rgba(255,255,255,0.2); padding: 14px 28px; border-radius: var(--radius-md); font-size: 16px; font-weight: 600; cursor: pointer; transition: border-color 0.15s, color 0.15s; text-decoration: none; display: inline-block; font-family: inherit; }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
     .hero-photo { align-self: end; display: flex; align-items: flex-end; justify-content: center; }
-    .hero-photo img { width: 240px; height: auto; display: block; filter: drop-shadow(0 -8px 24px rgba(29,158,117,0.25)); }
+    .hero-photo img { width: 300px; height: auto; display: block; filter: drop-shadow(0 -10px 30px rgba(29,158,117,0.3)); }
 
-    /* FORM */
-    #form-section { padding: 2.5rem 2rem 3rem; }
-    .form-card { background: var(--bg-primary); border: 0.5px solid var(--border-strong); border-radius: var(--radius-lg); padding: 1.8rem; max-width: 440px; margin: 0 auto; box-shadow: 0 4px 24px rgba(29,158,117,0.08); }
-    .form-top { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
-    .form-avatar { width: 44px; height: 44px; border-radius: 50%; overflow: hidden; flex-shrink: 0; border: 2px solid var(--teal-light); }
+    /* ─── STATS BAR ──────────────────────────────── */
+    .stats-bar { background: var(--bg-primary); border-bottom: 1px solid var(--border); }
+    .stats-inner { max-width: var(--max-w); margin: 0 auto; padding: 1.6rem 2rem; display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap; }
+    .stat-item { text-align: center; }
+    .stat-item strong { display: block; font-size: 30px; font-weight: 800; color: var(--teal); letter-spacing: -1px; }
+    .stat-item span { font-size: 12px; color: var(--text-secondary); font-weight: 500; }
+
+    /* ─── SERVICIOS ──────────────────────────────── */
+    .services-section { padding: 5rem 0; background: var(--bg-secondary); }
+    .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .service-card { background: var(--bg-primary); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 2rem; transition: box-shadow 0.2s, transform 0.2s; }
+    .service-card:hover { box-shadow: var(--shadow-teal); transform: translateY(-3px); }
+    .service-icon { width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--teal-light); display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 1rem; }
+    .service-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+    .service-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.65; }
+    .service-tag { display: inline-block; margin-top: 14px; font-size: 11px; font-weight: 600; color: var(--teal); background: var(--teal-light); padding: 3px 10px; border-radius: 20px; }
+
+    /* ─── PAIN POINTS ────────────────────────────── */
+    .pains-section { padding: 5rem 0; background: var(--bg-primary); }
+    .pains-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
+    .pain { display: flex; flex-direction: column; gap: 10px; padding: 20px; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--bg-secondary); transition: border-color 0.15s, box-shadow 0.15s; }
+    .pain:hover { border-color: rgba(29,158,117,0.3); box-shadow: var(--shadow-sm); }
+    .pain-icon { width: 40px; height: 40px; min-width: 40px; border-radius: var(--radius-md); background: var(--red-light); display: flex; align-items: center; justify-content: center; font-size: 18px; }
+    .pain-body h4 { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+    .pain-body p { font-size: 12px; color: var(--text-secondary); line-height: 1.55; }
+
+    /* ─── HOW IT WORKS ───────────────────────────── */
+    .how-section { padding: 5rem 0; background: var(--bg-secondary); }
+    .how-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .steps { display: flex; flex-direction: column; gap: 0; }
+    .step { display: flex; gap: 20px; align-items: flex-start; padding: 1.6rem 0; border-bottom: 1px solid var(--border); }
+    .step:last-child { border-bottom: none; }
+    .step-num { width: 40px; height: 40px; min-width: 40px; border-radius: 50%; background: var(--teal); color: #fff; font-size: 16px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .step-body h4 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+    .step-body p { font-size: 14px; color: var(--text-secondary); line-height: 1.65; }
+    .how-visual { background: var(--teal-bg); border-radius: var(--radius-xl); padding: 2.5rem; }
+    .how-visual-title { font-size: 13px; font-weight: 600; color: var(--teal-mid); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.4rem; }
+    .result-item { display: flex; align-items: center; gap: 14px; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .result-item:last-child { border-bottom: none; }
+    .result-icon { font-size: 20px; }
+    .result-item span { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.5; }
+    .result-item strong { color: var(--teal-mid); }
+
+    /* ─── WHO ────────────────────────────────────── */
+    .who-section { padding: 5rem 0; background: var(--bg-primary); }
+    .who-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .who-card { border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 2rem; text-align: center; background: var(--bg-secondary); transition: border-color 0.2s, box-shadow 0.2s; }
+    .who-card:hover { border-color: var(--teal); box-shadow: var(--shadow-teal); }
+    .who-icon { font-size: 40px; margin-bottom: 14px; }
+    .who-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .who-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem; }
+    .who-list { text-align: left; list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .who-list li { font-size: 13px; color: var(--text-secondary); display: flex; align-items: center; gap: 8px; }
+    .who-list li::before { content: '✓'; color: var(--teal); font-weight: 700; flex-shrink: 0; }
+
+    /* ─── TESTIMONIALS ───────────────────────────── */
+    .testimonials-section { padding: 5rem 0; background: var(--teal-bg); }
+    .testimonials-section .section-title { color: #fff; }
+    .testimonials-section .section-desc { color: rgba(255,255,255,0.6); }
+    .testimonials-section .section-tag { color: var(--teal-mid); }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .tcard { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-xl); padding: 1.8rem; display: flex; flex-direction: column; gap: 1.2rem; transition: border-color 0.2s; }
+    .tcard:hover { border-color: rgba(93,202,165,0.4); }
+    .stars { color: var(--amber); font-size: 14px; letter-spacing: 2px; }
+    .tcard p { font-size: 15px; color: rgba(255,255,255,0.8); line-height: 1.75; font-style: italic; flex: 1; }
+    .t-author { display: flex; align-items: center; gap: 12px; }
+    .avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--teal); color: #fff; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .avatar.amber { background: var(--amber); }
+    .avatar.blue { background: #4A90D9; }
+    .t-author div { font-size: 13px; }
+    .t-author strong { display: block; font-weight: 600; color: #fff; }
+    .t-author span { color: rgba(255,255,255,0.5); }
+
+    /* ─── FAQ ────────────────────────────────────── */
+    .faq-section { padding: 5rem 0; background: var(--bg-primary); }
+    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .faq-item { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; transition: border-color 0.15s; }
+    .faq-item.open { border-color: rgba(29,158,117,0.35); }
+    .faq-btn { width: 100%; text-align: left; background: var(--bg-secondary); border: none; cursor: pointer; padding: 1.2rem 1.4rem; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-family: inherit; transition: background 0.15s; }
+    .faq-btn:hover { background: var(--bg-primary); }
+    .faq-item.open .faq-btn { background: var(--teal-light); }
+    .faq-question { font-size: 15px; font-weight: 600; color: var(--text-primary); line-height: 1.4; }
+    .faq-item.open .faq-question { color: var(--teal-dark); }
+    .faq-chevron { width: 22px; height: 22px; min-width: 22px; border-radius: 50%; background: var(--bg-primary); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; transition: transform 0.25s, background 0.15s; }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); background: var(--teal-light); border-color: rgba(29,158,117,0.3); }
+    .faq-chevron svg { width: 12px; height: 12px; stroke: var(--text-secondary); }
+    .faq-item.open .faq-chevron svg { stroke: var(--teal); }
+    .faq-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.25s; }
+    .faq-body.visible { max-height: 500px; padding: 1rem 1.4rem 1.4rem; }
+    .faq-body p { font-size: 14px; color: var(--text-secondary); line-height: 1.75; }
+    .faq-body p + p { margin-top: 8px; }
+
+    /* ─── CONTACT / FORM ─────────────────────────── */
+    .contact-section { padding: 5rem 0; background: var(--bg-secondary); }
+    .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .contact-info h2 { font-size: 30px; font-weight: 800; margin-bottom: 1rem; line-height: 1.2; }
+    .contact-info p { font-size: 15px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.6rem; }
+    .contact-guarantees { display: flex; flex-direction: column; gap: 12px; }
+    .guarantee { display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--text-secondary); }
+    .guarantee-icon { width: 34px; height: 34px; min-width: 34px; border-radius: 50%; background: var(--teal-light); color: var(--teal); display: flex; align-items: center; justify-content: center; font-size: 15px; }
+    .form-card { background: var(--bg-primary); border: 1px solid var(--border-strong); border-radius: var(--radius-xl); padding: 2rem; box-shadow: var(--shadow-md); }
+    .form-top { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
+    .form-avatar { width: 46px; height: 46px; border-radius: 50%; overflow: hidden; flex-shrink: 0; border: 2px solid var(--teal-light); }
     .form-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
     .form-card h3 { font-size: 17px; font-weight: 700; }
     .form-card > p { font-size: 14px; color: var(--text-secondary); margin-bottom: 1.4rem; margin-top: 8px; }
     .field { margin-bottom: 14px; }
     .field label { display: block; font-size: 11px; color: var(--text-secondary); margin-bottom: 5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
-    .field input { width: 100%; padding: 10px 14px; border: 0.5px solid var(--border-strong); border-radius: var(--radius-md); font-size: 15px; background: var(--bg-secondary); color: var(--text-primary); font-family: inherit; transition: border-color 0.15s, box-shadow 0.15s; }
-    .field input:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(29,158,117,0.15); }
-    .btn-submit { width: 100%; background: var(--teal); color: #fff; border: none; padding: 13px; border-radius: var(--radius-md); font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 6px; transition: background 0.15s, transform 0.1s; font-family: inherit; }
+    .field input, .field select, .field textarea { width: 100%; padding: 10px 14px; border: 1px solid var(--border-strong); border-radius: var(--radius-md); font-size: 15px; background: var(--bg-secondary); color: var(--text-primary); font-family: inherit; transition: border-color 0.15s, box-shadow 0.15s; }
+    .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(29,158,117,0.15); }
+    .field textarea { resize: vertical; min-height: 80px; }
+    .btn-submit { width: 100%; background: var(--teal); color: #fff; border: none; padding: 14px; border-radius: var(--radius-md); font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 6px; transition: background 0.15s, transform 0.1s; font-family: inherit; }
     .btn-submit:hover { background: var(--teal-dark); }
     .btn-submit:active { transform: scale(0.99); }
     .form-legal { font-size: 11px; color: var(--text-tertiary); text-align: center; margin-top: 12px; line-height: 1.5; }
-    .success-msg { display: none; text-align: center; padding: 2rem 1rem; max-width: 440px; margin: 0 auto; }
-    .success-icon { width: 52px; height: 52px; border-radius: 50%; background: var(--green-light); color: var(--green-dark); font-size: 22px; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; }
-    .success-msg h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .success-msg { display: none; text-align: center; padding: 2.5rem 1rem; }
+    .success-icon { width: 56px; height: 56px; border-radius: 50%; background: var(--green-light); color: var(--green-dark); font-size: 24px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+    .success-msg h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
     .success-msg p { font-size: 14px; color: var(--text-secondary); }
 
-    /* PROOF */
-    .proof { padding: 1.5rem 2rem; display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; border-top: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); background: var(--bg-secondary); }
-    .proof-item { text-align: center; }
-    .proof-item strong { display: block; font-size: 26px; font-weight: 700; color: var(--teal); }
-    .proof-item span { font-size: 12px; color: var(--text-secondary); }
+    /* ─── FOOTER ─────────────────────────────────── */
+    footer { background: var(--teal-bg); }
+    .footer-inner { max-width: var(--max-w); margin: 0 auto; padding: 3.5rem 2rem 2rem; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem; }
+    .footer-brand p { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.65; margin-top: 12px; max-width: 260px; }
+    .footer-col h4 { font-size: 12px; font-weight: 700; color: var(--teal-mid); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .footer-col a { font-size: 13px; color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.15s; }
+    .footer-col a:hover { color: var(--teal-mid); }
+    .footer-bottom { max-width: var(--max-w); margin: 0 auto; padding: 1.4rem 2rem; border-top: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+    .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.3); }
+    .footer-bottom a { color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.15s; }
+    .footer-bottom a:hover { color: var(--teal-mid); }
 
-    /* SECTIONS */
-    .section { padding: 3rem 2rem; }
-    .section + .section { border-top: 0.5px solid var(--border); }
-    .section-label { font-size: 11px; font-weight: 600; color: var(--teal); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
-    .section h2 { font-size: 22px; font-weight: 700; margin-bottom: 0.5rem; }
-    .section-sub { font-size: 15px; color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.6; max-width: 560px; }
-
-    /* PAIN POINTS */
-    .pains-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    @media (max-width: 520px) { .pains-grid { grid-template-columns: 1fr; } }
-    .pain { display: flex; gap: 14px; align-items: flex-start; padding: 16px; border: 0.5px solid var(--border); border-radius: var(--radius-lg); background: var(--bg-primary); transition: border-color 0.15s; }
-    .pain:hover { border-color: var(--border-strong); }
-    .pain-icon { width: 36px; height: 36px; min-width: 36px; border-radius: var(--radius-md); background: var(--red-light); display: flex; align-items: center; justify-content: center; font-size: 17px; }
-    .pain-body h4 { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
-    .pain-body p { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
-
-    /* STEPS */
-    .steps { display: flex; flex-direction: column; gap: 20px; }
-    .step { display: flex; gap: 18px; align-items: flex-start; }
-    .step-num { width: 36px; height: 36px; min-width: 36px; border-radius: 50%; background: var(--teal-light); color: var(--teal); font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
-    .step-body h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
-    .step-body p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
-
-    /* WHO */
-    .who-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
-    @media (max-width: 520px) { .who-grid { grid-template-columns: 1fr; } }
-    .who-card { background: var(--bg-secondary); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.2rem; text-align: center; }
-    .who-card .icon { font-size: 26px; margin-bottom: 10px; }
-    .who-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
-    .who-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
-
-    /* TESTIMONIAL */
-    .testimonial-wrap { padding: 0 2rem 3rem; }
-    .testimonial { background: var(--bg-secondary); border-left: 3px solid var(--teal); border-radius: 0 var(--radius-md) var(--radius-md) 0; padding: 1.4rem 1.6rem; }
-    .testimonial p { font-size: 15px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 14px; font-style: italic; }
-    .t-author { display: flex; align-items: center; gap: 12px; }
-    .avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--teal); color: #fff; font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
-    .t-author div { font-size: 13px; }
-    .t-author strong { display: block; font-weight: 600; }
-    .t-author span { color: var(--text-secondary); }
-
-    /* CTA BOTTOM */
-    .cta-bottom { padding: 4rem 2rem; text-align: center; background: var(--teal-bg); }
-    .cta-bottom h2 { font-size: 26px; font-weight: 700; margin-bottom: 10px; color: #ffffff; }
-    .cta-bottom p { font-size: 15px; color: rgba(255,255,255,0.6); margin-bottom: 2rem; max-width: 440px; margin-left: auto; margin-right: auto; }
-    .cta-bottom .btn-submit { max-width: 340px; margin: 0 auto; display: block; background: var(--teal-mid); color: var(--teal-bg); }
-    .cta-bottom .btn-submit:hover { background: #9FE1CB; }
-
-    /* FOOTER */
-    .footer { padding: 1.4rem 2rem; border-top: 0.5px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
-    .footer p { font-size: 12px; color: var(--text-tertiary); }
-    .footer a { color: var(--text-tertiary); text-decoration: none; }
-    .footer a:hover { color: var(--teal); }
-
-    @media (max-width: 600px) {
-      .hero { grid-template-columns: 1fr; }
+    /* ─── RESPONSIVE ─────────────────────────────── */
+    @media (max-width: 960px) {
+      .hero-inner { grid-template-columns: 1fr; }
       .hero-photo { display: none; }
-      .hero h1 { font-size: 24px; }
-      .nav, .section, #form-section { padding-left: 1.2rem; padding-right: 1.2rem; }
-      .proof { gap: 1.5rem; }
+      .pains-grid { grid-template-columns: repeat(2,1fr); }
+      .how-inner { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr 1fr; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .contact-inner { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 680px) {
+      .hero h1 { font-size: 28px; }
+      .section-title { font-size: 22px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .who-grid { grid-template-columns: 1fr; }
+      .pains-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .stats-inner { gap: 2rem; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
     }
   </style>
 </head>
 <body>
-<div class="lp-wrap">
 
+  <!-- ════════ NAVIGATION ════════ -->
   <nav class="nav">
-    <a href="#" class="logo">
-      <div class="logo-icon">
-        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="10" cy="10" r="8" fill="#085041"/>
-          <path d="M10 3L11.8 8.5H17.5L12.9 11.8L14.6 17.3L10 14L5.4 17.3L7.1 11.8L2.5 8.5H8.2L10 3Z" fill="#5DCAA5"/>
-        </svg>
+    <div class="nav-inner">
+      <a href="#inicio" class="logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="10" cy="10" r="8" fill="#085041"/>
+            <path d="M10 3L11.8 8.5H17.5L12.9 11.8L14.6 17.3L10 14L5.4 17.3L7.1 11.8L2.5 8.5H8.2L10 3Z" fill="#5DCAA5"/>
+          </svg>
+        </div>
+        <div>
+          <span class="logo-text"><span class="part1">Maesr</span><span class="part2">ía</span></span>
+          <span class="logo-sub">Consultoría</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="#servicios" class="nav-link">Servicios</a>
+        <a href="#como-funciona" class="nav-link">Cómo funciona</a>
+        <a href="#testimonios" class="nav-link">Testimonios</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+        <a href="#contacto" class="nav-cta nav-link">Consulta gratis</a>
       </div>
-      <div>
-        <span class="logo-text"><span class="part1">Maesr</span><span class="part2">ía</span></span>
-        <span class="logo-sub">Consultoría</span>
-      </div>
-    </a>
-    <a href="#form-section" class="nav-cta" onclick="smoothScroll(event,'form-section')">Consulta gratis</a>
+      <button class="hamburger" id="hamburger" aria-label="Menú" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="#servicios" class="nav-link" onclick="closeMenu()">Servicios</a>
+      <a href="#como-funciona" class="nav-link" onclick="closeMenu()">Cómo funciona</a>
+      <a href="#para-quien" class="nav-link" onclick="closeMenu()">Para quién</a>
+      <a href="#testimonios" class="nav-link" onclick="closeMenu()">Testimonios</a>
+      <a href="#faq" class="nav-link" onclick="closeMenu()">FAQ</a>
+      <a href="#contacto" class="nav-cta" onclick="closeMenu()">Consulta gratis →</a>
+    </div>
   </nav>
 
-  <section class="hero">
-    <div class="hero-text">
-      <div class="badge">Para docentes y centros formativos</div>
-      <h1>Recupera <em>5 a 10 horas</em> a la semana eliminando tareas repetitivas</h1>
-      <p>Diseño sistemas personalizados que automatizan lo que te roba tiempo — para que puedas enfocarte en enseñar.</p>
-      <a href="#form-section" class="nav-cta" onclick="smoothScroll(event,'form-section')" style="display:inline-block;">Quiero una consulta gratuita</a>
-    </div>
-    <div class="hero-photo">
-      <img src="foto-consultor.png" alt="Consultor de Maestría" />
-    </div>
-  </section>
-
-  <div id="form-section">
-    <div class="form-card" id="form-wrapper">
-      <div class="form-top">
-        <div class="form-avatar"><img src="foto-consultor.png" alt="Consultor" /></div>
-        <h3>Agenda tu consulta gratuita</h3>
+  <!-- ════════ HERO ════════ -->
+  <section id="inicio" class="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="badge">Para docentes y centros formativos</div>
+        <h1>Recupera <em>5 a 10 horas</em> a la semana eliminando tareas repetitivas</h1>
+        <p class="hero-desc">Diseño sistemas personalizados que automatizan lo que te roba tiempo — para que puedas enfocarte en enseñar.</p>
+        <div class="hero-actions">
+          <a href="#contacto" class="btn-primary">Quiero una consulta gratuita →</a>
+          <a href="#como-funciona" class="btn-ghost">Ver cómo funciona</a>
+        </div>
       </div>
-      <p>Sin compromiso. En 30 minutos te digo exactamente qué se puede automatizar en tu caso.</p>
-      <div class="field"><label for="f-name">Nombre</label><input type="text" id="f-name" placeholder="Tu nombre completo" autocomplete="name" /></div>
-      <div class="field"><label for="f-email">Email</label><input type="email" id="f-email" placeholder="tu@email.com" autocomplete="email" /></div>
-      <div class="field"><label for="f-phone">Teléfono</label><input type="tel" id="f-phone" placeholder="+34 600 000 000" autocomplete="tel" /></div>
-      <button class="btn-submit" id="btn-submit" onclick="handleSubmit()">Quiero recuperar mi tiempo →</button>
-      <p class="form-legal">Sin spam. Tus datos se usan solo para contactarte. Puedes darte de baja cuando quieras.</p>
-    </div>
-    <div class="success-msg" id="success-msg">
-      <div class="success-icon">✓</div>
-      <h3>¡Perfecto, te hemos recibido!</h3>
-      <p>Me pondré en contacto contigo en menos de 24h para coordinar la consulta gratuita.</p>
-    </div>
-  </div>
-
-  <div class="proof">
-    <div class="proof-item"><strong>+40</strong><span>centros y docentes</span></div>
-    <div class="proof-item"><strong>8h</strong><span>ahorradas de media/semana</span></div>
-    <div class="proof-item"><strong>100%</strong><span>adaptado a tu caso</span></div>
-  </div>
-
-  <section class="section">
-    <div class="section-label">¿Te suena esto?</div>
-    <h2>Los problemas que frenan a tu centro cada día</h2>
-    <p class="section-sub">Si reconoces alguna de estas situaciones, estás perdiendo tiempo y dinero que podrías recuperar.</p>
-    <div class="pains-grid">
-      <div class="pain"><div class="pain-icon">📋</div><div class="pain-body"><h4>Carga administrativa interminable</h4><p>Matrículas, horarios y aulas gestionadas a mano. Tiempo que no va a la enseñanza.</p></div></div>
-      <div class="pain"><div class="pain-icon">🔔</div><div class="pain-body"><h4>Recordatorios y avisos manuales</h4><p>Horas enviando a mano recordatorios de pagos, reuniones y eventos del centro.</p></div></div>
-      <div class="pain"><div class="pain-icon">📊</div><div class="pain-body"><h4>Sin seguimiento real del alumno</h4><p>Te enteras tarde de que un alumno tiene dificultades. Sin datos en tiempo real, no puedes actuar.</p></div></div>
-      <div class="pain"><div class="pain-icon">💬</div><div class="pain-body"><h4>Comunicación lenta con familias</h4><p>Padres esperando días para saber notas u horarios. Desconfianza y pérdida de alumnos.</p></div></div>
-      <div class="pain"><div class="pain-icon">🌊</div><div class="pain-body"><h4>Colapso en picos del curso</h4><p>Inicio de curso, matrículas o exámenes: colas, errores y estrés por falta de automatización.</p></div></div>
-      <div class="pain"><div class="pain-icon">🎯</div><div class="pain-body"><h4>Educación de talla única</h4><p>Métodos rígidos que no se adaptan a cada alumno. Frustración y bajo rendimiento evitables.</p></div></div>
-      <div class="pain"><div class="pain-icon">🕐</div><div class="pain-body"><h4>Correcciones y feedback lentos</h4><p>Semanas para devolver exámenes corregidos. Los alumnos no pueden mejorar a tiempo.</p></div></div>
-      <div class="pain"><div class="pain-icon">🆘</div><div class="pain-body"><h4>Sin soporte fuera del aula</h4><p>Los alumnos se atrancan por la tarde con una duda y no tienen a quién preguntar.</p></div></div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="section-label">Cómo trabajamos</div>
-    <h2>Tres pasos para recuperar tu tiempo</h2>
-    <p class="section-sub">Un proceso claro y sin complicaciones, adaptado a lo que ya tienes.</p>
-    <div class="steps">
-      <div class="step"><div class="step-num">1</div><div class="step-body"><h4>Auditoría de tu flujo de trabajo</h4><p>Analizamos juntos qué tareas haces cada semana y cuánto tiempo llevan. Identificamos exactamente dónde está el problema.</p></div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Diseño del sistema a medida</h4><p>Creo un sistema de automatización adaptado a tus herramientas actuales. Sin cambiar todo lo que ya funciona.</p></div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Implantación y acompañamiento</h4><p>Lo ponemos en marcha contigo y te aseguro que funciona. Seguimiento incluido las primeras semanas.</p></div></div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="section-label">Para quién es</div>
-    <h2>Si eres uno de estos, esto es para ti</h2>
-    <p class="section-sub">Trabajo con cualquier perfil del sector educativo que quiera recuperar su tiempo.</p>
-    <div class="who-grid">
-      <div class="who-card"><div class="icon">👩‍🏫</div><h4>Profesor particular</h4><p>Tienes muchos alumnos y poco tiempo para la gestión administrativa.</p></div>
-      <div class="who-card"><div class="icon">🏫</div><h4>Academia</h4><p>Gestionas equipos, matrículas y comunicación con familias cada día.</p></div>
-      <div class="who-card"><div class="icon">🏢</div><h4>Empresa de formación</h4><p>Coordinas cursos, ponentes y certificaciones a gran escala.</p></div>
-    </div>
-  </section>
-
-  <div class="testimonial-wrap">
-    <div class="testimonial">
-      <p>"En dos semanas dejé de pasar dos horas al día enviando emails y confirmaciones. Ahora todo funciona solo y yo me dedico a preparar mis clases."</p>
-      <div class="t-author">
-        <div class="avatar">MG</div>
-        <div><strong>Marta García</strong><span>Profesora de inglés · 60 alumnos</span></div>
+      <div class="hero-photo">
+        <img src="foto-consultor.png" alt="Consultor de Maestría" />
       </div>
     </div>
-  </div>
-
-  <section class="cta-bottom">
-    <h2>¿Listo para recuperar tu tiempo?</h2>
-    <p>Consulta gratuita de 30 minutos. Te digo exactamente qué puedes automatizar y cuánto tiempo ganarías.</p>
-    <button class="btn-submit" onclick="smoothScroll(event,'form-section')">Reservar mi consulta gratuita →</button>
   </section>
 
-  <footer class="footer">
-    <p>© 2026 Maestría Consultoría</p>
-    <p><a href="mailto:hola@maestria.es">hola@maestria.es</a> · <a href="#">Política de privacidad</a></p>
+  <!-- ════════ STATS BAR ════════ -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-item"><strong>+40</strong><span>centros y docentes</span></div>
+      <div class="stat-item"><strong>8h</strong><span>ahorradas de media/semana</span></div>
+      <div class="stat-item"><strong>100%</strong><span>adaptado a tu caso</span></div>
+      <div class="stat-item"><strong>30 min</strong><span>consulta inicial gratis</span></div>
+    </div>
+  </div>
+
+  <!-- ════════ SERVICIOS ════════ -->
+  <section id="servicios" class="services-section">
+    <div class="container">
+      <div class="section-tag">Qué ofrezco</div>
+      <h2 class="section-title">Soluciones de automatización a medida</h2>
+      <p class="section-desc">Cada centro es diferente. Analizo tu situación concreta y diseño el sistema que más tiempo te va a devolver.</p>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">⚙️</div>
+          <h3>Automatización administrativa</h3>
+          <p>Matrículas, horarios, facturas y recordatorios gestionados sin intervención manual. Tu equipo se libera de tareas repetitivas de bajo valor.</p>
+          <span class="service-tag">Ahorra hasta 4h/semana</span>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">📡</div>
+          <h3>Comunicación automatizada</h3>
+          <p>Emails, WhatsApp y notificaciones que se envían solos según el evento: bienvenida, recordatorios de pago, notas, ausencias y mucho más.</p>
+          <span class="service-tag">Ahorra hasta 3h/semana</span>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">📈</div>
+          <h3>Seguimiento del alumno</h3>
+          <p>Dashboards en tiempo real con asistencia, progreso y alertas tempranas. Actúa antes de que un alumno abandone, no después.</p>
+          <span class="service-tag">Reduce abandonos un 30%</span>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🤖</div>
+          <h3>Asistente IA para dudas</h3>
+          <p>Chatbot entrenado con tu material que resuelve las preguntas frecuentes de los alumnos 24/7, sin que tengas que responder tú.</p>
+          <span class="service-tag">Soporte fuera del aula</span>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">✍️</div>
+          <h3>Corrección y feedback rápido</h3>
+          <p>Sistemas que aceleran la corrección de ejercicios y generan feedback personalizado. Tus alumnos mejoran antes; tú tardas mucho menos.</p>
+          <span class="service-tag">Reduce tiempo de corrección</span>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🔗</div>
+          <h3>Integración de herramientas</h3>
+          <p>Conecto lo que ya usas: Google Workspace, Moodle, Airtable, Notion, Make, Zapier… Sin cambiar tu flujo actual, solo mejorándolo.</p>
+          <span class="service-tag">Sin partir de cero</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ PAIN POINTS ════════ -->
+  <section class="pains-section">
+    <div class="container">
+      <div class="section-tag">¿Te suena esto?</div>
+      <h2 class="section-title">Los problemas que frenan a tu centro cada día</h2>
+      <p class="section-desc">Si reconoces alguna de estas situaciones, estás perdiendo tiempo y dinero que podrías recuperar.</p>
+      <div class="pains-grid">
+        <div class="pain"><div class="pain-icon">📋</div><div class="pain-body"><h4>Carga administrativa interminable</h4><p>Matrículas, horarios y aulas gestionadas a mano. Tiempo que no va a la enseñanza.</p></div></div>
+        <div class="pain"><div class="pain-icon">🔔</div><div class="pain-body"><h4>Recordatorios manuales</h4><p>Horas enviando a mano recordatorios de pagos, reuniones y eventos del centro.</p></div></div>
+        <div class="pain"><div class="pain-icon">📊</div><div class="pain-body"><h4>Sin seguimiento real del alumno</h4><p>Te enteras tarde de que un alumno tiene dificultades. Sin datos en tiempo real, no puedes actuar.</p></div></div>
+        <div class="pain"><div class="pain-icon">💬</div><div class="pain-body"><h4>Comunicación lenta con familias</h4><p>Padres esperando días para saber notas u horarios. Desconfianza y pérdida de alumnos.</p></div></div>
+        <div class="pain"><div class="pain-icon">🌊</div><div class="pain-body"><h4>Colapso en picos del curso</h4><p>Inicio de curso, matrículas o exámenes: colas, errores y estrés por falta de automatización.</p></div></div>
+        <div class="pain"><div class="pain-icon">🎯</div><div class="pain-body"><h4>Educación de talla única</h4><p>Métodos rígidos que no se adaptan a cada alumno. Frustración y bajo rendimiento evitables.</p></div></div>
+        <div class="pain"><div class="pain-icon">🕐</div><div class="pain-body"><h4>Correcciones y feedback lentos</h4><p>Semanas para devolver exámenes. Los alumnos no pueden mejorar a tiempo.</p></div></div>
+        <div class="pain"><div class="pain-icon">🆘</div><div class="pain-body"><h4>Sin soporte fuera del aula</h4><p>Los alumnos se atrancan con una duda y no tienen a quién preguntar.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ CÓMO FUNCIONA ════════ -->
+  <section id="como-funciona" class="how-section">
+    <div class="container">
+      <div class="section-tag">Cómo trabajamos</div>
+      <h2 class="section-title">Tres pasos para recuperar tu tiempo</h2>
+      <p class="section-desc">Un proceso claro y sin complicaciones, adaptado a lo que ya tienes.</p>
+      <div class="how-inner">
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h4>Auditoría de tu flujo de trabajo</h4>
+              <p>Analizamos juntos qué tareas haces cada semana y cuánto tiempo llevan. Identificamos exactamente dónde está el mayor cuello de botella.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h4>Diseño del sistema a medida</h4>
+              <p>Creo un sistema de automatización adaptado a tus herramientas actuales. Sin cambiar todo lo que ya funciona. Solo conectando lo que tienes de forma inteligente.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <h4>Implantación y acompañamiento</h4>
+              <p>Lo ponemos en marcha contigo y me aseguro de que funciona desde el primer día. Seguimiento incluido las primeras semanas hasta que todo ruede solo.</p>
+            </div>
+          </div>
+        </div>
+        <div class="how-visual">
+          <div class="how-visual-title">Lo que consigues</div>
+          <div class="result-item"><span class="result-icon">⏱️</span><span><strong>5 a 10 horas</strong> recuperadas cada semana, de media.</span></div>
+          <div class="result-item"><span class="result-icon">📬</span><span>Comunicaciones enviadas <strong>automáticamente</strong> sin que toques nada.</span></div>
+          <div class="result-item"><span class="result-icon">📊</span><span>Dashboard con el <strong>estado real</strong> de tu centro en tiempo real.</span></div>
+          <div class="result-item"><span class="result-icon">🧑‍🎓</span><span>Alumnos con <strong>soporte 24/7</strong> y feedback más rápido.</span></div>
+          <div class="result-item"><span class="result-icon">🔧</span><span>Sistema que funciona <strong>sin ti</strong> una vez configurado.</span></div>
+          <div class="result-item"><span class="result-icon">🚀</span><span>Resultados visibles en las <strong>primeras dos semanas</strong>.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ PARA QUIÉN ════════ -->
+  <section id="para-quien" class="who-section">
+    <div class="container">
+      <div class="section-tag">Para quién es</div>
+      <h2 class="section-title">Si eres uno de estos, esto es para ti</h2>
+      <p class="section-desc">Trabajo con cualquier perfil del sector educativo que quiera recuperar su tiempo y crecer sin contratar más personal.</p>
+      <div class="who-grid">
+        <div class="who-card">
+          <div class="who-icon">👩‍🏫</div>
+          <h3>Profesor particular</h3>
+          <p>Tienes muchos alumnos y poco tiempo para la gestión.</p>
+          <ul class="who-list">
+            <li>Recordatorios y pagos automáticos</li>
+            <li>Materiales y ejercicios enviados solos</li>
+            <li>Seguimiento de progreso individual</li>
+          </ul>
+        </div>
+        <div class="who-card">
+          <div class="who-icon">🏫</div>
+          <h3>Academia</h3>
+          <p>Gestionas equipos, matrículas y comunicación con familias cada día.</p>
+          <ul class="who-list">
+            <li>Proceso de matrícula sin papeleos</li>
+            <li>Comunicación masiva con familias</li>
+            <li>Informes de rendimiento automáticos</li>
+          </ul>
+        </div>
+        <div class="who-card">
+          <div class="who-icon">🏢</div>
+          <h3>Empresa de formación</h3>
+          <p>Coordinas cursos, ponentes y certificaciones a gran escala.</p>
+          <ul class="who-list">
+            <li>Gestión de certificaciones automatizada</li>
+            <li>Coordinación de ponentes y aulas</li>
+            <li>Facturación y reportes sin intervención</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ TESTIMONIOS ════════ -->
+  <section id="testimonios" class="testimonials-section">
+    <div class="container">
+      <div class="section-tag">Testimonios</div>
+      <h2 class="section-title">Lo que dicen quienes ya lo usan</h2>
+      <p class="section-desc">Resultados reales de profesores y centros que trabajan con Maestría.</p>
+      <div class="testimonials-grid">
+        <div class="tcard">
+          <div class="stars">★★★★★</div>
+          <p>"En dos semanas dejé de pasar dos horas al día enviando emails y confirmaciones. Ahora todo funciona solo y yo me dedico a preparar mis clases."</p>
+          <div class="t-author">
+            <div class="avatar">MG</div>
+            <div><strong>Marta García</strong><span>Profesora de inglés · 60 alumnos</span></div>
+          </div>
+        </div>
+        <div class="tcard">
+          <div class="stars">★★★★★</div>
+          <p>"Recuperamos 7 horas semanales en el equipo de secretaría. Las matrículas, recordatorios y facturas ahora se gestionan solas. Es un antes y un después."</p>
+          <div class="t-author">
+            <div class="avatar amber">CR</div>
+            <div><strong>Carlos Ruiz</strong><span>Director · Academia de idiomas</span></div>
+          </div>
+        </div>
+        <div class="tcard">
+          <div class="stars">★★★★★</div>
+          <p>"El chatbot de dudas fue lo que más me sorprendió. Los alumnos resuelven sus preguntas por la tarde sin necesitar que yo esté disponible. La satisfacción subió mucho."</p>
+          <div class="t-author">
+            <div class="avatar blue">LP</div>
+            <div><strong>Laura Pérez</strong><span>Formadora corporativa · 3 empresas cliente</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ FAQ ════════ -->
+  <section id="faq" class="faq-section">
+    <div class="container">
+      <div class="section-tag">Preguntas frecuentes</div>
+      <h2 class="section-title">Todo lo que necesitas saber</h2>
+      <p class="section-desc">Resuelvo aquí las dudas más comunes. Si no encuentras la tuya, escríbeme directamente.</p>
+      <div class="faq-grid">
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span class="faq-question">¿Necesito conocimientos técnicos para usar los sistemas?</span>
+            <span class="faq-chevron"><svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 4L6 8L10 4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <div class="faq-body">
+            <p>No. Todo se diseña para que lo puedas usar tú y tu equipo sin ningún conocimiento técnico. Una vez implantado, funciona de forma transparente: recibirás lo que necesitas sin tener que configurar nada.</p>
+            <p>Si en algún momento surge una duda, estoy disponible durante el período de acompañamiento y puedo resolverla rápidamente.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span class="faq-question">¿Cuánto tiempo tarda en estar todo funcionando?</span>
+            <span class="faq-chevron"><svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 4L6 8L10 4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <div class="faq-body">
+            <p>Depende de la complejidad del sistema, pero los primeros resultados suelen verse en la primera o segunda semana. La mayoría de implantaciones completas quedan operativas entre 2 y 4 semanas desde la primera sesión.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span class="faq-question">¿Tengo que cambiar todas las herramientas que uso ahora?</span>
+            <span class="faq-chevron"><svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 4L6 8L10 4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <div class="faq-body">
+            <p>No. El objetivo es conectar e integrar lo que ya tienes, no tirarlo todo y empezar desde cero. Trabajo con Google Workspace, Moodle, Notion, Airtable, WhatsApp Business y muchas otras plataformas habituales en centros educativos.</p>
+            <p>Si hay alguna herramienta que ya no te aporta o que se puede sustituir por algo mejor y más barato, te lo explicaré, pero nunca te obligaré a cambiar algo que funciona.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span class="faq-question">¿Cuánto cuesta el servicio?</span>
+            <span class="faq-chevron"><svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 4L6 8L10 4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <div class="faq-body">
+            <p>No hay un precio fijo porque cada caso es diferente. El coste depende del alcance de la automatización, el número de herramientas implicadas y el tiempo de acompañamiento necesario.</p>
+            <p>La consulta inicial de 30 minutos es completamente gratuita y sin compromiso. En esa llamada te digo exactamente qué haría y qué costaría en tu caso concreto.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span class="faq-question">¿Qué pasa si el sistema falla o deja de funcionar?</span>
+            <span class="faq-chevron"><svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 4L6 8L10 4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <div class="faq-body">
+            <p>Durante las primeras semanas tras la implantación incluyo soporte prioritario para detectar y corregir cualquier incidencia. Los sistemas que diseño están pensados para ser robustos y con poca dependencia de servicios externos críticos.</p>
+            <p>Además, te dejo siempre documentación clara de cómo funciona todo, para que puedas entender y gestionar el sistema aunque no estés trabajando conmigo.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span class="faq-question">¿Es adecuado para un profesor particular con pocos alumnos?</span>
+            <span class="faq-chevron"><svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 4L6 8L10 4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <div class="faq-body">
+            <p>Sí. Incluso con 15 o 20 alumnos, la gestión de recordatorios, pagos y comunicación puede llevar varias horas semanales. Hay soluciones muy sencillas y económicas para perfiles pequeños que marcan una diferencia real.</p>
+            <p>Durante la consulta gratuita evaluamos si el retorno de inversión tiene sentido en tu caso y te lo digo con honestidad.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span class="faq-question">¿Se pueden automatizar las comunicaciones con las familias?</span>
+            <span class="faq-chevron"><svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 4L6 8L10 4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <div class="faq-body">
+            <p>Sí, y es uno de los puntos donde más tiempo se recupera. Puedo automatizar el envío de notas, informes de progreso, avisos de ausencias, recordatorios de pago, convocatorias de reuniones y cualquier comunicación periódica que ahora haces a mano.</p>
+            <p>Todo cumpliendo con la normativa de protección de datos (RGPD) y con los consentimientos necesarios.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            <span class="faq-question">¿Trabajas solo con centros en España?</span>
+            <span class="faq-chevron"><svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 4L6 8L10 4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <div class="faq-body">
+            <p>No. Trabajo en remoto, por lo que puedo colaborar con centros de cualquier país de habla hispana. Todo el proceso (auditoría, diseño e implantación) se hace por videollamada y en remoto sin ningún problema.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ CONTACTO / FORM ════════ -->
+  <section id="contacto" class="contact-section">
+    <div class="container">
+      <div class="contact-inner">
+        <div class="contact-info">
+          <div class="section-tag">Contacto</div>
+          <h2>¿Listo para recuperar tu tiempo?</h2>
+          <p>Agenda tu consulta gratuita de 30 minutos. Sin compromiso. Te digo exactamente qué puedes automatizar y cuánto tiempo ganarías en tu caso.</p>
+          <div class="contact-guarantees">
+            <div class="guarantee"><div class="guarantee-icon">✓</div>Consulta 100% gratuita y sin compromiso</div>
+            <div class="guarantee"><div class="guarantee-icon">⚡</div>Respuesta en menos de 24 horas</div>
+            <div class="guarantee"><div class="guarantee-icon">🔒</div>Tus datos no se comparten con nadie</div>
+            <div class="guarantee"><div class="guarantee-icon">🎯</div>Plan personalizado para tu caso concreto</div>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <div id="form-wrapper">
+            <div class="form-top">
+              <div class="form-avatar"><img src="foto-consultor.png" alt="Consultor" /></div>
+              <h3>Agenda tu consulta gratuita</h3>
+            </div>
+            <p>Sin compromiso. En 30 minutos te digo exactamente qué se puede automatizar en tu caso.</p>
+            <div class="field"><label for="f-name">Nombre</label><input type="text" id="f-name" placeholder="Tu nombre completo" autocomplete="name" /></div>
+            <div class="field"><label for="f-email">Email</label><input type="email" id="f-email" placeholder="tu@email.com" autocomplete="email" /></div>
+            <div class="field"><label for="f-phone">Teléfono</label><input type="tel" id="f-phone" placeholder="+34 600 000 000" autocomplete="tel" /></div>
+            <div class="field">
+              <label for="f-type">Tipo de centro</label>
+              <select id="f-type">
+                <option value="">Selecciona una opción</option>
+                <option>Profesor particular</option>
+                <option>Academia / Centro de idiomas</option>
+                <option>Centro educativo (colegio / instituto)</option>
+                <option>Empresa de formación</option>
+                <option>Otro</option>
+              </select>
+            </div>
+            <div class="field"><label for="f-msg">¿Cuál es tu mayor problema ahora mismo? (opcional)</label><textarea id="f-msg" placeholder="Ej: Paso horas enviando recordatorios de pago a mano..."></textarea></div>
+            <button class="btn-submit" id="btn-submit" onclick="handleSubmit()">Quiero recuperar mi tiempo →</button>
+            <p class="form-legal">Sin spam. Tus datos se usan solo para contactarte. Puedes darte de baja cuando quieras.</p>
+          </div>
+          <div class="success-msg" id="success-msg">
+            <div class="success-icon">✓</div>
+            <h3>¡Perfecto, te hemos recibido!</h3>
+            <p>Me pondré en contacto contigo en menos de 24h para coordinar la consulta gratuita.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ FOOTER ════════ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#inicio" class="logo">
+          <div class="logo-icon">
+            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="10" cy="10" r="8" fill="#085041"/>
+              <path d="M10 3L11.8 8.5H17.5L12.9 11.8L14.6 17.3L10 14L5.4 17.3L7.1 11.8L2.5 8.5H8.2L10 3Z" fill="#5DCAA5"/>
+            </svg>
+          </div>
+          <div>
+            <span class="logo-text"><span class="part1">Maesr</span><span class="part2">ía</span></span>
+            <span class="logo-sub">Consultoría</span>
+          </div>
+        </a>
+        <p>Automatización para docentes, academias y empresas de formación. Recupera tu tiempo y céntrate en enseñar.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="#servicios">Automatización administrativa</a></li>
+          <li><a href="#servicios">Comunicación automatizada</a></li>
+          <li><a href="#servicios">Seguimiento del alumno</a></li>
+          <li><a href="#servicios">Asistente IA</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Empresa</h4>
+        <ul>
+          <li><a href="#como-funciona">Cómo funciona</a></li>
+          <li><a href="#para-quien">Para quién es</a></li>
+          <li><a href="#testimonios">Testimonios</a></li>
+          <li><a href="#faq">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="mailto:hola@maestria.es">hola@maestria.es</a></li>
+          <li><a href="#contacto">Consulta gratuita</a></li>
+          <li><a href="#">Política de privacidad</a></li>
+          <li><a href="#">Aviso legal</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Maestría Consultoría. Todos los derechos reservados.</p>
+      <p><a href="#">Política de privacidad</a> · <a href="#">Aviso legal</a> · <a href="#">Cookies</a></p>
+    </div>
   </footer>
 
-</div>
 <script>
-  // ⚠️ Reemplaza FORMSPREE_ID por tu ID real de Formspree (ej: xpwzgkla)
   var FORMSPREE_ENDPOINT = 'https://formspree.io/f/mnjwnaka';
 
-  function smoothScroll(e, id) { if(e) e.preventDefault(); document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'}); }
+  function toggleMenu() {
+    var menu = document.getElementById('mobile-menu');
+    menu.classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('mobile-menu').classList.remove('open');
+  }
+
+  function toggleFaq(btn) {
+    var item = btn.closest('.faq-item');
+    var body = item.querySelector('.faq-body');
+    var isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function(el) {
+      el.classList.remove('open');
+      el.querySelector('.faq-body').classList.remove('visible');
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      body.classList.add('visible');
+    }
+  }
 
   function handleSubmit() {
     var name  = document.getElementById('f-name').value.trim();
     var email = document.getElementById('f-email').value.trim();
     var phone = document.getElementById('f-phone').value.trim();
+    var type  = document.getElementById('f-type').value;
+    var msg   = document.getElementById('f-msg').value.trim();
 
-    if (!name)                    { showError('f-name',  'Introduce tu nombre.');        return; }
+    if (!name)                         { showError('f-name',  'Introduce tu nombre.');        return; }
     if (!email || !email.includes('@')) { showError('f-email', 'Introduce un email válido.'); return; }
-    if (!phone)                   { showError('f-phone', 'Introduce tu teléfono.');      return; }
+    if (!phone)                        { showError('f-phone', 'Introduce tu teléfono.');      return; }
 
     var btn = document.getElementById('btn-submit');
     btn.disabled = true;
@@ -278,7 +741,7 @@
     fetch(FORMSPREE_ENDPOINT, {
       method:  'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({ nombre: name, email: email, telefono: phone })
+      body: JSON.stringify({ nombre: name, email: email, telefono: phone, tipo_centro: type, mensaje: msg })
     })
     .then(function(res) {
       if (res.ok) {
